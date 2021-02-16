@@ -111,12 +111,13 @@ var vueTouchEvents = {
 					triggerEvent(event, this, 'moved');
 				}
 
-			} else if (!$this.swipeOutBounded) {
-				var swipeOutBounded = $this.options.swipeTolerance;
+			} 
+			// else if (!$this.swipeOutBounded) {
+			// 	var swipeOutBounded = $this.options.swipeTolerance;
 
-				$this.swipeOutBounded = Math.abs($this.startX - $this.currentX) > swipeOutBounded &&
-					Math.abs($this.startY - $this.currentY) > swipeOutBounded;
-			}
+			// 	$this.swipeOutBounded = Math.abs($this.startX - $this.currentX) > swipeOutBounded &&
+			// 		Math.abs($this.startY - $this.currentY) > swipeOutBounded;
+			// }
 
 			if ($this.touchMoved) {
 				triggerEvent(event, this, 'moving');
@@ -158,7 +159,10 @@ var vueTouchEvents = {
 			// Fix #33, Trigger `end` event when touch stopped
 			triggerEvent(event, this, 'end');
 
+			console.log('touchend1');
+
 			if (!$this.touchMoved) {
+				console.log('touchend1 !notmoved');
 				// detect if this is a longTap event or not
 				if ($this.callbacks.longtap && event.timeStamp - $this.touchStartTime > $this.options.longTapTimeInterval) {
 					if (event.cancelable) {
@@ -177,6 +181,7 @@ var vueTouchEvents = {
 				}
 
 			} else if (!$this.swipeOutBounded) {
+				console.log('touchend1 !notbounded');
 				var swipeOutBounded = $this.options.swipeTolerance,
 					direction,
 					distanceY = Math.abs($this.startY - $this.currentY),
@@ -204,6 +209,8 @@ var vueTouchEvents = {
 					}
 
 				}
+			} else {
+
 			}
 		}
 
