@@ -93,6 +93,8 @@ var vueTouchEvents = {
 		}
 
 		function touchMoveEvent(event) {
+			console.log('touchmove');
+
 			var $this = this.$$touchObj;
 
 			$this.currentX = touchX(event);
