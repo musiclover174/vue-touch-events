@@ -49,8 +49,6 @@ var vueTouchEvents = {
 		}, constructorOptions);
 
 		function touchStartEvent(event) {
-			console.log('touchstart');
-
 			var $this = this.$$touchObj,
 				isTouchEvent = event.type.indexOf('touch') >= 0,
 				isMouseEvent = event.type.indexOf('mouse') >= 0,
@@ -93,8 +91,6 @@ var vueTouchEvents = {
 		}
 
 		function touchMoveEvent(event) {
-			console.log('touchmove');
-
 			var $this = this.$$touchObj;
 
 			$this.currentX = touchX(event);
@@ -112,12 +108,6 @@ var vueTouchEvents = {
 				}
 
 			} 
-			// else if (!$this.swipeOutBounded) {
-			// 	var swipeOutBounded = $this.options.swipeTolerance;
-
-			// 	$this.swipeOutBounded = Math.abs($this.startX - $this.currentX) > swipeOutBounded &&
-			// 		Math.abs($this.startY - $this.currentY) > swipeOutBounded;
-			// }
 
 			if ($this.touchMoved) {
 				triggerEvent(event, this, 'moving');
@@ -135,8 +125,6 @@ var vueTouchEvents = {
 		}
 
 		function touchEndEvent(event) {
-			console.log('touchend');
-
 			var $this = this.$$touchObj,
 				isTouchEvent = event.type.indexOf('touch') >= 0,
 				isMouseEvent = event.type.indexOf('mouse') >= 0;
@@ -159,10 +147,7 @@ var vueTouchEvents = {
 			// Fix #33, Trigger `end` event when touch stopped
 			triggerEvent(event, this, 'end');
 
-			console.log('touchend1');
-
 			if (!$this.touchMoved) {
-				console.log('touchend1 !notmoved');
 				// detect if this is a longTap event or not
 				if ($this.callbacks.longtap && event.timeStamp - $this.touchStartTime > $this.options.longTapTimeInterval) {
 					if (event.cancelable) {
@@ -181,7 +166,6 @@ var vueTouchEvents = {
 				}
 
 			} else if (!$this.swipeOutBounded) {
-				console.log('touchend1 !notbounded');
 				var swipeOutBounded = $this.options.swipeTolerance,
 					direction,
 					distanceY = Math.abs($this.startY - $this.currentY),
@@ -198,8 +182,6 @@ var vueTouchEvents = {
 						direction = $this.startX > $this.currentX ? 'left' : 'right';
 					}
 				
-					console.log('touchend direction', direction);
-					
 					// Only emit the specified event when it has modifiers
 					if ($this.callbacks['swipe.' + direction]) {
 						triggerEvent(event, this, 'swipe.' + direction, direction);
